@@ -155,9 +155,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist": {
-						"value": "[parameters('incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist')]"
 					}
 				}
 			},
@@ -178,6 +175,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist": {
+						"value": "[parameters('incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist')]"
 					},
 					"tumbling_Window_trigger_properties_pipeline_parameters_enddate": {
 						"value": "[parameters('tumbling_Window_trigger_properties_pipeline_parameters_enddate')]"
