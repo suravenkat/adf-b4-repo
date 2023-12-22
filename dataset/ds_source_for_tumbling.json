@@ -1,0 +1,17 @@
+{
+	"name": "ds_source_for_tumbling",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_copy_multi_tables_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales_tumbling"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

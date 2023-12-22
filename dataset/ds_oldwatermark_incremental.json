@@ -1,0 +1,17 @@
+{
+	"name": "ds_oldwatermark_incremental",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_copy_multi_tables_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "watermarktable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

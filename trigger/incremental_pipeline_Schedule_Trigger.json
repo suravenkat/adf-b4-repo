@@ -1,0 +1,44 @@
+{
+	"name": "incremental_pipeline_Schedule_Trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "incremental_pipeline",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"tablelist": [
+						{
+							"tableName": "iplteams",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						},
+						{
+							"tableName": "employees",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						},
+						{
+							"tableName": "salesitems",
+							"tableSchemaName": "dbo",
+							"WaterMark_Column": "last_updated"
+						}
+					]
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2023-12-17T21:03:00",
+				"endTime": "2023-12-19T15:27:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "abf-b4-lab",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2ac1c2d0-9a50-41c6-afa1-2766d0af9bdd",
+		"tenantId": "100a7e00-c249-4c60-b1c3-70200fb7e3dc"
+	}
+}

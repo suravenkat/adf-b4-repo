@@ -1,0 +1,19 @@
+{
+	"name": "ds_source_Binary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_target_for_copy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "source/source2files",
+				"fileSystem": "sourcecontainer"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
