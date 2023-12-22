@@ -1,0 +1,17 @@
+{
+	"name": "FeaturePipeline_QA",
+	"properties": {
+		"activities": [
+			{
+				"name": "feature",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 3
+				}
+			}
+		],
+		"annotations": []
+	}
+}
