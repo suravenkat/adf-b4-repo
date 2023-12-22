@@ -1,0 +1,195 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "abf-b4-lab"
+		},
+		"ls_adls_accesskeys_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_accesskeys'"
+		},
+		"ls_copy_multi_tables_sql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_copy_multi_tables_sql'"
+		},
+		"ls_scriptForLogging_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_scriptForLogging'"
+		},
+		"ls_sql_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sql_db'"
+		},
+		"ls_target_sql_for_incremental_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_target_sql_for_incremental'"
+		},
+		"ls_adls_accesskeys_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"ls_adls_adfb4_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"ls_target_for_copy_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist": {
+			"type": "array",
+			"defaultValue": [
+				{
+					"tableName": "iplteams",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "employees",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "salesitems",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				}
+			]
+		},
+		"tumbling_Window_trigger_properties_pipeline_parameters_enddate": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"tumbling_Window_trigger_properties_pipeline_parameters_startdate": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "abf-b4-lab_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_adls_accesskeys_accountKey": {
+						"value": "[parameters('ls_adls_accesskeys_accountKey')]"
+					},
+					"ls_copy_multi_tables_sql_connectionString": {
+						"value": "[parameters('ls_copy_multi_tables_sql_connectionString')]"
+					},
+					"ls_scriptForLogging_connectionString": {
+						"value": "[parameters('ls_scriptForLogging_connectionString')]"
+					},
+					"ls_sql_db_connectionString": {
+						"value": "[parameters('ls_sql_db_connectionString')]"
+					},
+					"ls_target_sql_for_incremental_connectionString": {
+						"value": "[parameters('ls_target_sql_for_incremental_connectionString')]"
+					},
+					"ls_adls_accesskeys_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_accesskeys_properties_typeProperties_url')]"
+					},
+					"ls_adls_adfb4_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_adfb4_properties_typeProperties_url')]"
+					},
+					"ls_target_for_copy_properties_typeProperties_url": {
+						"value": "[parameters('ls_target_for_copy_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "abf-b4-lab_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abf-b4-lab_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "abf-b4-lab_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist": {
+						"value": "[parameters('incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abf-b4-lab_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "abf-b4-lab_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"tumbling_Window_trigger_properties_pipeline_parameters_enddate": {
+						"value": "[parameters('tumbling_Window_trigger_properties_pipeline_parameters_enddate')]"
+					},
+					"tumbling_Window_trigger_properties_pipeline_parameters_startdate": {
+						"value": "[parameters('tumbling_Window_trigger_properties_pipeline_parameters_startdate')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abf-b4-lab_ArmTemplate_2')]"
+			]
+		}
+	]
+}

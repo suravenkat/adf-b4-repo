@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "abf-b4-lab"
+		},
+		"ls_adls_accesskeys_accountKey": {
+			"value": ""
+		},
+		"ls_copy_multi_tables_sql_connectionString": {
+			"value": ""
+		},
+		"ls_scriptForLogging_connectionString": {
+			"value": ""
+		},
+		"ls_sql_db_connectionString": {
+			"value": ""
+		},
+		"ls_target_sql_for_incremental_connectionString": {
+			"value": ""
+		},
+		"ls_adls_accesskeys_properties_typeProperties_url": {
+			"value": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"ls_adls_adfb4_properties_typeProperties_url": {
+			"value": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"ls_target_for_copy_properties_typeProperties_url": {
+			"value": "https://suraadlsdev.dfs.core.windows.net/"
+		},
+		"incremental_pipeline_Schedule_Trigger_properties_incremental_pipeline_parameters_tablelist": {
+			"value": [
+				{
+					"tableName": "iplteams",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "employees",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "salesitems",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				}
+			]
+		},
+		"tumbling_Window_trigger_properties_pipeline_parameters_enddate": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"tumbling_Window_trigger_properties_pipeline_parameters_startdate": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
